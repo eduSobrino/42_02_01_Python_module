@@ -7,7 +7,8 @@ class Plant:
             name: str,
             height: float,
             age: int,
-            growth_rate: float = 0.8) -> None:
+            growth_rate: float = 0.8
+    ) -> None:
         self.name = name
         self.height = height
         self.age = age
@@ -69,8 +70,16 @@ class Plant:
 
 
 def main() -> None:
-    my_plant = Plant('Rose', 25, 30)
-    my_plant.grow()
+    plants = [
+            Plant('rose', 25, 30),
+            Plant('oak', 200, 365),
+            Plant('cactus', 5, 90),
+            Plant('sunflower', 80, 45),
+            Plant('fern', 15, 120)
+    ]
+    for plant in plants:
+        print('Created: ', end='')
+        plant.show()
 
 
 if __name__ == "__main__":
