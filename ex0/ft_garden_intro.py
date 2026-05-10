@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
+
 def main() -> None:
     print("=== Welcome to My Garden ===")
-    input('Plant: ')
-    input('Height: ')
-    input('Age: ')
+    input("Plant: ")
+    input("Height: ")
+    input("Age: ")
     print("\n=== End of Program ===")
 
 
