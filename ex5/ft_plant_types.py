@@ -92,9 +92,9 @@ class Flower(Plant):
             name: str,
             height: float,
             age: int,
-            growth_rate: float = DEFAULT_GROWTH_RATE,
             color: str,
-            bloomed: bool
+            bloomed: bool,
+            growth_rate: float = Plant.DEFAULT_GROWTH_RATE
     ) -> None:
         super().__init__(name, height, age, growth_rate)
         self._color = color
@@ -106,18 +106,18 @@ class Flower(Plant):
     def blooming(self) -> None:
         if self._bloomed is False:
             print(
-                    f"{self.get_name()} has not bloomed yet"
-                    f"[asking the {self.get_name().lowcase()} to bloom]"
+                    f"i {self.get_name()} has not bloomed yet\n"
+                    f"[asking the {self.get_name().lower()} to bloom]"
             )
             self._bloomed = True
         else:
-            print(f"{self.get_name()} is blooming beautifully!]")
+            print(f" {self.get_name()} is blooming beautifully!]")
             self._bloomed = False
 
     def show(self) -> None:
-        super().show(self)
-        print(f"\n Color:{self.get_color()} \n ")
-        self.blooming(self)
+        super().show()
+        print(f" Color:{self.get_color()}")
+        self.blooming()
 
 
 class Tree(Plant):
@@ -126,8 +126,8 @@ class Tree(Plant):
             name: str,
             height: float,
             age: int,
-            growth_rate: float = DEFAULT_GROWTH_RATE,
-            trunk_diameter: float
+            trunk_diameter: float,
+            growth_rate: float = Plant.DEFAULT_GROWTH_RATE
     ) -> None:
         super().__init__(name, height, age, growth_rate)
         self._trunk_diameter = trunk_diameter
@@ -137,16 +137,15 @@ class Tree(Plant):
 
     def produce_shade(self) -> None:
         print(
-                f"[asking the {self.get_name()} to produce shade]"
+                f"[asking the {self.get_name()} to produce shade]\n"
                 f"Tree {self.get_name()} now produces a shade of "
                 f"{self.get_height():.1f}cm long and "
                 f"{self.get_trunk_diameter():.1f}cm wide."
         )
 
     def show(self) -> None:
-        super().show(self)
-        print(f"\n Trunk diameter:{self.get_trunk_diameter():.1f} \n ")
-        self.produce_shade(self)
+        super().show()
+        print(f" Trunk diameter:{self.get_trunk_diameter():.1f}")
 
 
 class Vegetable(Plant):
@@ -155,9 +154,9 @@ class Vegetable(Plant):
             name: str,
             height: float,
             age: int,
-            growth_rate: float,
             harvest_season: str,
-            nutritional_value: int
+            nutritional_value: int,
+            growth_rate: float = Plant.DEFAULT_GROWTH_RATE
     ) -> None:
         super().__init__(name, height, age, growth_rate)
         self._harvest_season = harvest_season.capitalize()
@@ -180,13 +179,13 @@ class Vegetable(Plant):
         self.set_age(self.get_age() + days)
         self.set_nutritional_value(self.get_nutritional_value() + days)
         print(
-                f"[make {self.get_name().lowercase()} "
+                f"[make {self.get_name().lower()} "
                 f"grow and age for {days} days]"
         )
 
     def show(self) -> None:
-        super().show(self)
-        print(f"\n Harvest season:{self.get_harvest_season()}")
+        super().show()
+        print(f" Harvest season:{self.get_harvest_season()}")
         print(f" Nutritional value:{self.get_nutritional_value()}")
 
 
@@ -196,12 +195,12 @@ def main() -> None:
     my_flower = Flower("rose", 15, 10, "red", False)
     my_flower.show()
     my_flower.show()
-    print("=== Tree")
+    print("\n=== Tree")
     my_tree = Tree("oak", 200, 365, 5)
     my_tree.show()
     my_tree.produce_shade()
-    print("=== Vegetable")
-    my_vegetable = Vegetable("tomato", 5, 10, 2.1, "april", 0)
+    print("\n=== Vegetable")
+    my_vegetable = Vegetable("tomato", 5, 10, "april", 0, 2.1)
     my_vegetable.show()
     my_vegetable.grow(20)
     my_vegetable.show()
