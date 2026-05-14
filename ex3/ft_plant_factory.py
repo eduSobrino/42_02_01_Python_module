@@ -2,66 +2,67 @@
 
 
 class Plant:
-    def __init__(
-        self, name: str, height: float, age: int, growth_rate: float = 0.8
-    ) -> None:
-        self.name = name
-        self.height = height
-        self.age = age
-        self.growth_rate = growth_rate
+    DEFAULT_GROWTH_RATE = 0.8
 
-    @property
-    def height(self) -> float:
+    def __init__(
+        self,
+        name: str,
+        height: float,
+        age: int,
+        growth_rate: float = DEFAULT_GROWTH_RATE
+    ) -> None:
+        self._name = name.capitalize()
+        self._height = height
+        self._age = age
+        self._growth_rate = growth_rate
+
+    def get_name(self) -> str:
+        return self._name
+
+    def get_height(self) -> float:
         return self._height
 
-    @height.setter
-    def height(self, value: float) -> None:
+    def set_height(self, value: float) -> None:
         if value <= 0:
-            raise ValueError("Height must be positive")
+            print("Height must be positive")
+            return
         self._height = value
 
-    @property
-    def age(self) -> int:
+    def get_age(self) -> int:
         return self._age
 
-    @age.setter
-    def age(self, value: int) -> None:
+    def set_age(self, value: int) -> None:
         if value < 0:
-            raise ValueError("Age cannot be negative")
+            print("Age cannot be negative")
+            return
         self._age = value
 
-    @property
-    def growth_rate(self) -> float:
+    def get_growth_rate(self) -> float:
         return self._growth_rate
 
-    @growth_rate.setter
-    def growth_rate(self, value: float) -> None:
+    def set_growth_rate(self, value: float) -> None:
         if value <= 0:
-            raise ValueError("Growth rate must be positive")
+            print("Growth rate must be positive")
+            return
         self._growth_rate = value
 
-    def grow(self, days: int = 7) -> None:
+    def grow(self, days: int) -> None:
         if days <= 0:
-            raise ValueError("Days must be positive")
-        init_height: float = self.height
-        print("=== Garden Plant Growth ===")
-        for i in range(1, days + 1):
-            self.height += self.growth_rate
-            self.age += 1
-            print(
-                f"=== Day {i} ===\n"
-                f"{self.name.capitalize()}: "
-                f"{self.height:.1f}cm, "
-                f"{self.age} days old"
-            )
-        grown: float = self.height - init_height
-        print(f"Growth this week: {grown:.1f}cm\n")
+            print("Days must be positive")
+            return
+        self.set_height(self.get_height() + days * self.get_growth_rate())
+
+    def age(self, days: int) -> None:
+        if days <= 0:
+            print("Days must be positive")
+            return
+        self.set_age(self.get_age() + days)
 
     def show(self) -> None:
         print(
-                f"{self.name.capitalize()}: "
-                f"{self.height:.1f}cm, "
-                f"{self.age} days old"
+                f"{self.get_name()}: "
+                f"{self.get_height():.1f}cm, "
+                f"{self.get_age()} days old"
         )
 
 
